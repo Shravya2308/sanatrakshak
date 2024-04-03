@@ -1,0 +1,139 @@
+/* Body styles */
+body {
+    font-family: 'Times New Roman', Times, serif;
+    background-color: #f5f5f5;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+/* Style for the entire table */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    background-color: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+/* Style for table headers */
+th {
+    background-color: #f2f2f2;
+    color: #333;
+    font-weight: bold;
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* Style for table rows */
+tr {
+    background-color: #fff;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Style for alternate rows */
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+/* Style for table cells */
+td {
+    padding: 15px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* Style for map container */
+/* .map {
+    height: 200px;
+    width: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px;
+} */
+
+/* Style for dropdown */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropbtn {
+    background-color: #f2f2f2;
+    color: #333;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 16px; /* Increase font size */
+    font-weight: bold; /* Bold font weight */
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    min-width: 160px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+    border-radius: 5px;
+}
+
+.dropdown-content a {
+    color: #333;
+    padding: 10px;
+    text-decoration: none;
+    display: block;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 16px; /* Increase font size */
+    font-weight: bold; /* Bold font weight */
+}
+
+.dropdown-content a:hover {
+    background-color: #f2f2f2;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: #ddd;
+}
+
+/* Style for heading boxes */
+.heading-box {
+    display: inline-block;
+    padding: 10px 15px;
+    border-radius: 15px;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+/* Different light colors for headings */
+.person-name {
+    background-color: #e6f2ff;
+}
+
+.location {
+    background-color: #ffebcc;
+}
+
+.emergency-type {
+    background-color: #e6ffe6;
+}
+
+.call-priority {
+    background-color: #FFCCCC;
+}
+
+.map {
+    background-color: #ffd9b3;
+}
+
+

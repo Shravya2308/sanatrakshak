@@ -1,0 +1,142 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emergency Calls</title>
+    <link rel="stylesheet" href="/static/dash.css">
+</head>
+<body>
+    <h1>Emergency Calls</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Person Name</th>
+                <th>Location</th>
+                <th>Emergency Type</th>
+                <th>Call Priority</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for record in data %}
+            <tr>
+                <td>{{ record.person_name }}</td>
+                <td>{{ record.location }}</td>
+                <td>{{ record.emergency_type }}</td>
+                <td>{{ record.call_priority }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emergency Calls</title>
+    <link rel="stylesheet" href="/static/dash.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <style>
+        /* Keyframes for the news ticker animation */
+        @keyframes ticker {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+
+        /* Style for the news ticker */
+        .news-ticker {
+            white-space: nowrap;
+            overflow: hidden;
+            animation: ticker 10s linear infinite; /* Adjust animation duration as needed */
+        }
+    </style>
+</head>
+<body>
+    <div class="news-ticker">
+        <h1>Emergency Calls</h1>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th><div class="heading-box person-name">Recorded Call</div></th>
+                <th><div class = "heading-box location">Location</div></th>
+                <th><div class="heading-box emergency-type">Emergency Type</div></th>
+                <th><div class="heading-box call-priority">Call Priority</div></th>
+                <th><div class="heading-box map">Map</div></th> <!-- New column for the map -->
+            </tr>
+        </thead>
+        <tbody>
+            {% for record in data %}
+            <tr>
+                <td>{{ record.text }}</td>
+                <td>{{ record.location }}</td>
+                <td>{{ record.emergency_type }}</td>
+                <td>
+                    <div class="dropdown">
+                        <button class="dropbtn" data-priority="{{ record.call_priority }}">{{ record.call_priority }}</button>
+                        <div class="dropdown-content">
+                            <a href="#" data-priority="High">High</a>
+                            <a href="#" data-priority="Medium">Medium</a>
+                            <a href="#" data-priority="Low">Low</a>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <div id="map_{{ loop.index }}" style="height: 200px; width: 400px;"></div>
+
+                    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+                    <script>
+                        var map_{{ loop.index }} = L.map('map_{{ loop.index }}').setView({{record.coordinates}}, 13);
+                
+                        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                            attribution: '© OpenStreetMap contributors'
+                        }).addTo(map_{{ loop.index }});
+                
+                        // var marker = L.marker([19.19646645, 72.96175385]).addTo(map);
+                        // marker.bindPopup('Hello, this is a popup!').openPopup();
+                        var marker_{{ loop.index }} = L.marker({{record.coordinates}}).addTo(map_{{ loop.index }});
+                        marker_{{ loop.index }}.bindPopup('Emergency').openPopup()
+                    </script>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <script>
+        // JavaScript for dropdown interaction
+        var dropdowns = document.querySelectorAll('.dropdown');
+
+        dropdowns.forEach(function(dropdown) {
+            var button = dropdown.querySelector('.dropbtn');
+            var content = dropdown.querySelector('.dropdown-content');
+
+            button.addEventListener('click', function() {
+                content.classList.toggle('show');
+            });
+
+            content.querySelectorAll('a').forEach(function(option) {
+                option.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    var newPriority = option.dataset.priority;
+                    button.textContent = newPriority;
+                    button.dataset.priority = newPriority;
+                    content.classList.remove('show');
+
+                    // You can add further logic here to send the updated priority to the server
+                });
+            });
+
+            // Close the dropdown if the user clicks outside of it
+            window.addEventListener('click', function(e) {
+                if (!dropdown.contains(e.target)) {
+                    content.classList.remove('show');
+                }
+            });
+        });
+    </script>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+</body>
+</html>
