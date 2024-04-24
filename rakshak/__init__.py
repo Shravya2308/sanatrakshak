@@ -13,3 +13,4 @@ from rakshak.routes import voice
 from rakshak.routes import upload
 from rakshak.routes import pipeline
 from rakshak.routes import dashboard
+from rakshak.routes import update

@@ -27,14 +27,16 @@ def dash():
 
     place_cordinates = []
     data_from_db = fetchall()
+    print(data_from_db)
     for i in range(0,len(data_from_db)):
-        data_from_db[i]["coordinates"] = get_cordinates_for_map(data_from_db[i]["location"])
+        data_from_db[i]["coordinates"] = get_cordinates_for_map(data_from_db[i]['location'])
 
     return render_template("dash.html",data=data_from_db)
 
 
 def get_cordinates_for_map(name):
-    apikey = 'AqLctXS7hFA7zlUkaBQmh_kMOiqVnE34eQve1lTR7Go3g4E5E7yCtUulb7xUlQPY'
+    print("My nanme is ",name)
+    apikey = 'Ao4XIvVIe-m8C-gY4TKD7V0FhTxzf82nIhO6gtSuI8M9kyC3cWypeqdRSG7pY851'
     geolocator = Bing(api_key=apikey, timeout=10)
     geocoded_adr = geolocator.geocode(name)
     print(geocoded_adr.raw['point']['coordinates'])
