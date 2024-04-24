@@ -24,6 +24,7 @@ Install python pip
 ```
 
 ### 
+Run
 ```bash
  python server.py
 ```
